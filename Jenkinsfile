@@ -1,5 +1,7 @@
 pipeline { 
- agent any
+	agent {
+		label 'apache'
+	}
     
     tools{
     maven 'Apache_Maven_3.6.3'
@@ -24,9 +26,9 @@ pipeline {
             steps{
               sshagent(["tomcat-new"]) {
                 sh """
-                    scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.46.103:/home/ubuntu/apache-tomcat-9.0.71/webapps/
-                    ssh ubuntu@172.31.46.103 /home/ubuntu/apache-tomcat-9.0.71/bin/shutdown.sh
-                    ssh ubuntu@172.31.46.103 /home/ubuntu/apache-tomcat-9.0.71/bin/startup.sh
+                    scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.44.212:/home/ubuntu/apache-tomcat-9.0.71/webapps/
+                    ssh ubuntu@172.31.44.212 /home/ubuntu/apache-tomcat-9.0.71/bin/shutdown.sh
+                    ssh ubuntu@172.31.44.212 /home/ubuntu/apache-tomcat-9.0.71/bin/startup.sh
                 """
               }
             }
