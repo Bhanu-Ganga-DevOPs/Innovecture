@@ -1,6 +1,11 @@
 pipeline {
     agent any
     
+    tools{
+    maven 'Apache_Maven_3.6.3'
+    
+    }
+    
     stages {
         stage('Code-checout') {
             steps {
@@ -9,11 +14,11 @@ pipeline {
         }
        stage('Maven-build'){
             steps{
-                withMaven(maven: 'mvn'){
+                
                     sh "mvn clean package"
                     sh "mv target/*.war target/myweb.war"
                 
-                }
+                
                 
             }
         }
