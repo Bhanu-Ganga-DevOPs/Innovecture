@@ -1,10 +1,6 @@
 pipeline {
     agent any
     
-    tools {
-        maven 'M3'
-    }
-
     stages {
         stage('Code-checout') {
             steps {
@@ -13,9 +9,12 @@ pipeline {
         }
         stage('Maven-build'){
             steps{
+                withMaven(maven: 'mvn'){
+                    sh "mvn clean package"
+                    sh "mv target/*.war target/myweb.war"
                 
-                sh "mvn clean package"
-                sh "mv target/*.war target/myweb.war"
+                }
+                
             }
         }
         stage('Deploy to Apacheserver'){
