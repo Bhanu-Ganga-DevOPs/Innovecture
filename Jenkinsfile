@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    
+    tools {
+        maven 'M3'
+    }
 
     stages {
         stage('Code-checout') {
@@ -9,7 +13,7 @@ pipeline {
         }
         stage('Maven-build'){
             steps{
-                def mvnHome = tool name: 'Apache Maven 3.6.3', type: 'maven'
+                
                 sh "mvn clean package"
                 sh "mv target/*.war target/myweb.war"
             }
