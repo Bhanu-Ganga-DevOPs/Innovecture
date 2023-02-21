@@ -7,6 +7,15 @@ pipeline {
                 git branch: 'main', credentialsId: '49014944-2d3e-44be-a5dc-c8c970b21d61', url: 'https://github.com/Bhanu-Ganga-DevOPs/Innovecture.git'
             }
         }
-  
+       stage('Maven-build'){
+            steps{
+                withMaven(maven: 'mvn'){
+                    sh "mvn clean package"
+                    sh "mv target/*.war target/myweb.war"
+                
+                }
+                
+            }
+        }
     }
 }
